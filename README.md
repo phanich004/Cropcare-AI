@@ -1,18 +1,18 @@
-# Crop Disease Detection 🌱
+# Crop Disease Detection 
 
 A modern, AI-powered web application for detecting crop diseases using TensorFlow.js and Next.js. Upload an image of your crop and get instant disease detection with treatment recommendations.
 
-## ✨ Features
+##  Features
 
-- 🎨 **Premium UI Design** - Modern glassmorphism effects, vibrant gradients, and smooth animations
-- 📤 **Drag & Drop Upload** - Easy image upload with drag-and-drop or click-to-browse
-- 🤖 **AI-Powered Detection** - Real-time disease detection using TensorFlow.js
-- 📊 **Confidence Scores** - Visual confidence indicators for predictions
-- 💊 **Treatment Recommendations** - Get actionable treatment advice for detected diseases
-- 📱 **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
-- ⚡ **Fast & Efficient** - Client-side inference with no server required
+-  **Premium UI Design** - Modern glassmorphism effects, vibrant gradients, and smooth animations
+-  **Drag & Drop Upload** - Easy image upload with drag-and-drop or click-to-browse
+-  **AI-Powered Detection** - Real-time disease detection using TensorFlow.js
+-  **Confidence Scores** - Visual confidence indicators for predictions
+-  **Treatment Recommendations** - Get actionable treatment advice for detected diseases
+-  **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+-  **Fast & Efficient** - Client-side inference with no server required
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -40,7 +40,7 @@ A modern, AI-powered web application for detecting crop diseases using TensorFlo
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 🧠 Model Setup
+##  Model Setup
 
 This application requires a trained TensorFlow.js model for crop disease detection.
 
@@ -79,7 +79,7 @@ tensorflowjs_converter --input_format keras \
 - **Color Channels**: RGB (3 channels)
 - **Normalization**: Values scaled to [0, 1]
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 crop-disease-detection/
@@ -100,66 +100,18 @@ crop-disease-detection/
 └── README.md
 ```
 
-## 🛠️ Available Scripts
+##  Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm start` - Start production server
 - `npm run export` - Export static site
 
-## 🎨 Design System
 
-The application features a premium design system with:
 
-- **Color Palette**: HSL-based colors with customizable hue and saturation
-- **Glassmorphism**: Frosted glass effects with backdrop blur
-- **Gradients**: Dynamic gradient backgrounds and accents
-- **Animations**: Smooth transitions and micro-interactions
-- **Typography**: Inter font family from Google Fonts
-- **Responsive**: Mobile-first responsive design
-
-## 🔧 Customization
-
-### Changing Colors
-
-Edit CSS custom properties in `styles/globals.css`:
-
-```css
-:root {
-  --primary-hue: 142;        /* Green hue */
-  --primary-sat: 76%;
-  --primary-light: 45%;
-  
-  --accent-hue: 280;         /* Purple hue */
-  --accent-sat: 85%;
-  --accent-light: 60%;
-}
-```
-
-### Adjusting Model Input Size
-
-Modify the `preprocessImage` function in `pages/index.js`:
-
-```javascript
-const targetSize = 224; // Change to your model's input size
-```
-
-## 📝 License
+##  License
 
 MIT
 
-## ⚠️ Disclaimer
 
-This application is for educational and research purposes. Always consult with agricultural experts and professionals for accurate disease diagnosis and treatment recommendations.
 
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to submit issues and pull requests.
-
-## 📧 Support
-
-For questions and support, please open an issue in the repository.
-
----
-
-**Built with ❤️ using Next.js and TensorFlow.js**

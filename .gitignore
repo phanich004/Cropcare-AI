@@ -42,9 +42,8 @@ Thumbs.db
 public/ort-*.wasm
 public/ort-*.js
 
-# Large model files - upload manually to GitHub
+# Large model files
 crop_disease_model_onnx/
 public/models/onnx/
 /model.onnx
-public/models/model.onnx
 

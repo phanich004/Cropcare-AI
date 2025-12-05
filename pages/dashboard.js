@@ -10,6 +10,8 @@ import styles from '../styles/Dashboard.module.css';
 export default function Dashboard() {
     const [predictions, setPredictions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [sortOrder, setSortOrder] = useState('newest'); // 'newest' or 'oldest'
     const { user } = useAuth();
 
     useEffect(() => {
@@ -65,6 +67,26 @@ export default function Dashboard() {
         });
     };
 
+    // Filter and sort predictions
+    const filteredPredictions = predictions
+        .filter(prediction => {
+            if (!searchQuery.trim()) return true;
+            const query = searchQuery.toLowerCase();
+            return (
+                (prediction.name && prediction.name.toLowerCase().includes(query)) ||
+                (prediction.disease && prediction.disease.toLowerCase().includes(query))
+            );
+        })
+        .sort((a, b) => {
+            const dateA = a.timestamp?.toDate?.() || new Date(a.createdAt);
+            const dateB = b.timestamp?.toDate?.() || new Date(b.createdAt);
+            return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+        });
+
+    const toggleSortOrder = () => {
+        setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest');
+    };
+
     return (
         <ProtectedRoute>
             <Head>
@@ -103,6 +125,42 @@ export default function Dashboard() {
                         <div className={styles.historySection}>
                             <div className={styles.sectionHeader}>
                                 <h2 className={styles.sectionTitle}>Prediction History</h2>
+                                <div className={styles.headerActions}>
+                                    {/* Search Bar */}
+                                    <div className={styles.searchContainer}>
+                                        <svg className={styles.searchIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="M21 21l-4.35-4.35" />
+                                        </svg>
+                                        <input
+                                            type="text"
+                                            placeholder="Search by name or disease..."
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                            className={styles.searchInput}
+                                        />
+                                        {searchQuery && (
+                                            <button 
+                                                onClick={() => setSearchQuery('')}
+                                                className={styles.clearSearch}
+                                            >
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                                </svg>
+                                            </button>
+                                        )}
+                                    </div>
+                                    
+                                    {/* Sort Toggle */}
+                                    <button onClick={toggleSortOrder} className={styles.sortButton}>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M11 5h10M11 9h7M11 13h4" />
+                                            <path d="M3 17l3 3 3-3M6 18V4" />
+                                        </svg>
+                                        {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
+                                    </button>
+                                </div>
                             </div>
 
                             {loading ? (
@@ -112,7 +170,23 @@ export default function Dashboard() {
                                         Loading your predictions...
                                     </p>
                                 </div>
-                            ) : predictions.length === 0 ? (
+                            ) : filteredPredictions.length === 0 && predictions.length > 0 ? (
+                                <div className={styles.emptyState}>
+                                    <div className={styles.emptyIcon}>
+                                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="M21 21l-4.35-4.35" />
+                                        </svg>
+                                    </div>
+                                    <h3 className={styles.emptyTitle}>No Results Found</h3>
+                                    <p className={styles.emptyText}>
+                                        No predictions match "{searchQuery}"
+                                    </p>
+                                    <button onClick={() => setSearchQuery('')} className={styles.actionButton}>
+                                        Clear Search
+                                    </button>
+                                </div>
+                            ) : filteredPredictions.length === 0 ? (
                                 <div className={styles.emptyState}>
                                     <div className={styles.emptyIcon}>
                                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -131,7 +205,7 @@ export default function Dashboard() {
                                 </div>
                             ) : (
                                 <div className={styles.historyGrid}>
-                                    {predictions.map((prediction) => (
+                                    {filteredPredictions.map((prediction) => (
                                         <div key={prediction.id} className={styles.historyCard}>
                                             {prediction.imageUrl && (
                                                 <div className={styles.historyImageContainer}>
@@ -145,6 +219,9 @@ export default function Dashboard() {
                                             <div className={styles.historyContent}>
                                                 <div className={styles.historyHeader}>
                                                     <div>
+                                                        {prediction.name && (
+                                                            <div className={styles.predictionName}>{prediction.name}</div>
+                                                        )}
                                                         <h3 className={styles.diseaseName}>{prediction.disease}</h3>
                                                         <div className={styles.historyDate}>
                                                             {formatDate(prediction.timestamp || prediction.createdAt)}

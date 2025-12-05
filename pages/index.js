@@ -79,6 +79,7 @@ const DISEASE_INFO = {
 
 export default function Home() {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [imageName, setImageName] = useState('');
     const [prediction, setPrediction] = useState(null);
     const [predicting, setPredicting] = useState(false);
     const [error, setError] = useState(null);
@@ -142,7 +143,10 @@ export default function Home() {
         setPrediction(null);
         setError(null);
 
-        if (!imageSrc) return;
+        if (!imageSrc) {
+            setImageName('');
+            return;
+        }
 
         // Check if model is ready
         if (!modelReady) {
@@ -169,6 +173,7 @@ export default function Home() {
             const diseaseInfo = DISEASE_INFO[diseaseKey] || DISEASE_INFO['Invalid'];
 
             const predictionData = {
+                name: imageName.trim() || `Scan ${new Date().toLocaleDateString()}`,
                 disease: diseaseInfo.name,
                 confidence: confidence,
                 description: diseaseInfo.description,
@@ -239,6 +244,22 @@ export default function Home() {
                                 <span>Loading AI model... This may take a minute on first load.</span>
                             </div>
                         )}
+
+                        {/* Name Input */}
+                        <div className={styles.nameInputContainer}>
+                            <label htmlFor="imageName" className={styles.nameLabel}>
+                                Name your scan (optional)
+                            </label>
+                            <input
+                                type="text"
+                                id="imageName"
+                                value={imageName}
+                                onChange={(e) => setImageName(e.target.value)}
+                                placeholder="e.g., Field A - Row 3, My corn plant..."
+                                className={styles.nameInput}
+                                maxLength={100}
+                            />
+                        </div>
 
                         <ImageUploader onImageSelect={handleImageSelect} />
 

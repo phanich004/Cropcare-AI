@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Environment files
+.env
+.env.*
+.env.local
+.env.example
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.log
+.vercel
+
+# Large WASM files (will be downloaded from CDN at runtime)
+*.wasm
+public/ort-*.wasm
+public/ort-*.js
+
+# Large model files - upload manually to GitHub
+crop_disease_model_onnx/
+public/models/onnx/
+/model.onnx
+public/models/model.onnx
+

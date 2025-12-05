@@ -1,0 +1,206 @@
+.resultContainer {
+    width: 100%;
+    max-width: 700px;
+    margin: var(--spacing-xl) auto 0;
+}
+
+.loadingState {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.loadingState .spinner {
+    margin: 0 auto var(--spacing-md);
+}
+
+.loadingText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.loadingSubtext {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Result Header */
+.resultHeader {
+    margin-bottom: var(--spacing-md);
+}
+
+.resultTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Disease Card */
+.diseaseCard {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.diseaseHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.diseaseName {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 200px;
+}
+
+.confidenceBadge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--gradient-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.confidenceLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.confidenceValue {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+}
+
+/* Confidence Bar */
+.confidenceBar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-dark);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-lg);
+}
+
+.confidenceFill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fillBar 1s ease-out;
+}
+
+@keyframes fillBar {
+    from {
+        width: 0;
+    }
+}
+
+/* Sections */
+.section {
+    margin-bottom: var(--spacing-md);
+}
+
+.section:last-of-type {
+    margin-bottom: 0;
+}
+
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.sectionTitle svg {
+    color: hsl(var(--primary-hue), var(--primary-sat), var(--primary-light));
+    flex-shrink: 0;
+}
+
+.sectionContent {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Disclaimer */
+.disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: hsla(45, 100%, 50%, 0.1);
+    border: 1px solid hsla(45, 100%, 50%, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.disclaimer svg {
+    color: hsl(45, 100%, 60%);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .diseaseHeader {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .diseaseName {
+        font-size: 1.5rem;
+    }
+
+    .confidenceBadge {
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .confidenceLabel {
+        margin-bottom: 0;
+        margin-right: var(--spacing-sm);
+    }
+
+    .confidenceValue {
+        font-size: 1.25rem;
+    }
+
+    .diseaseCard {
+        padding: var(--spacing-md);
+    }
+}

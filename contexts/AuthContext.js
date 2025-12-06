@@ -80,10 +80,18 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // Send password reset email
+    // Send password reset email with custom action URL
     const resetPassword = async (email) => {
         try {
-            await sendPasswordResetEmail(auth, email);
+            // Get the current domain for the action URL
+            const actionCodeSettings = {
+                // URL to redirect to after password reset
+                url: typeof window !== 'undefined' 
+                    ? `${window.location.origin}/login`
+                    : 'https://cropcare-ai.vercel.app/login',
+                handleCodeInApp: false,
+            };
+            await sendPasswordResetEmail(auth, email, actionCodeSettings);
         } catch (error) {
             throw error;
         }
